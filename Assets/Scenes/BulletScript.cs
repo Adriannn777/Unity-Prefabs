@@ -12,7 +12,17 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += bulletSpeed * transform.forward * Time.deltaTime;
+        transform.position += bulletSpeed * transform.up * Time.deltaTime;
         
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Detect");
+        print("Bam!");
+        HealthScript victim = collision.transform.GetComponent<HealthScript>();
+        if (victim)
+        {
+            victim.TakeDamage(50);
+        }
     }
 }
